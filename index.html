@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🔖 ポートフォリオ初稿（テスト公開版） | Nanami Yagishita</title>
+    <meta name="description" content="博士課程の孤独感軽減アプリ、音楽AI活用、画像生成サムネ制作、課外活動などのDraftをまとめたテスト公開用ポートフォリオ。" />
+
+    <!-- Social preview -->
+    <meta property="og:title" content="🔖 ポートフォリオ初稿（テスト公開版）" />
+    <meta property="og:description" content="Draft（作成中）プロジェクトのテスト公開版ポートフォリオ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://placehold.co/1200x630/png?text=Portfolio+Draft" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <style>
+      /* --- CSS Variables & Reset --- */
+      :root {
+        --bg: #0b0c10;
+        --panel: #11131a;
+        --panel-alt: #141823;
+        --text: #e9eef5;
+        --muted: #b7c2d0;
+        --accent: #6eb5ff;
+        --accent-2: #9b8cff;
+        --ok: #45d483;
+        --warn: #ffbe55;
+        --radius-xl: 18px;
+        --radius-2xl: 24px;
+        --shadow-md: 0 8px 24px rgba(0,0,0,.25);
+        --shadow-lg: 0 16px 40px rgba(0,0,0,.35);
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.6;
+        color: var(--text);
+        background: radial-gradient(1200px 800px at 10% -10%, rgba(110,181,255,.15), transparent 60%),
+                    radial-gradient(1000px 700px at 110% 20%, rgba(155,140,255,.12), transparent 60%),
+                    var(--bg);
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      /* --- Layout --- */
+      .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+      header {
+        position: sticky; top: 0; z-index: 10;
+        backdrop-filter: saturate(1.2) blur(8px);
+        background: color-mix(in oklab, var(--bg) 70%, #000 30% / .5);
+        border-bottom: 1px solid rgba(255,255,255,.06);
+      }
+      .header-inner { display: flex; align-items: center; gap: 16px; padding: 14px 24px; }
+      .brand {
+        display: flex; align-items: center; gap: 12px;
+        font-weight: 700; letter-spacing: .2px;
+      }
+      .brand .logo {
+        width: 36px; height: 36px; border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: var(--shadow-md);
+      }
+      .badge-draft {
+        display: inline-flex; align-items: center; gap: .45rem;
+        padding: 6px 10px; border-radius: 999px;
+        background: rgba(255,190,85,.12);
+        border: 1px solid rgba(255,190,85,.35);
+        color: var(--warn); font-weight: 600; font-size: .9rem;
+      }
+      .notice {
+        margin: 18px 0 0; padding: 14px 16px; border-radius: var(--radius-xl);
+        background: linear-gradient(0deg, rgba(255,255,255,.03), rgba(255,255,255,.03)), var(--panel);
+        border: 1px solid rgba(255,255,255,.06);
+      }
+
+      main { padding: 24px; }
+      h1 { font-size: clamp(1.6rem, 1.1rem + 2vw, 2.4rem); margin: 16px 0 8px; }
+      .lead { color: var(--muted); margin: 0 0 16px; }
+
+      .grid { display: grid; gap: 16px; grid-template-columns: repeat(1, minmax(0, 1fr)); }
+      @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (min-width: 1040px){ .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+      .card {
+        display: flex; flex-direction: column; gap: 12px;
+        padding: 18px; border-radius: var(--radius-2xl);
+        background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+        border: 1px solid rgba(255,255,255,.06);
+        box-shadow: var(--shadow-md);
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      }
+      .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: rgba(255,255,255,.14); }
+      .card h3 { margin: 4px 0 4px; font-size: 1.12rem; }
+      .pill { display: inline-flex; align-items: center; gap: .4rem; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: .85rem; border: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+      .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 3px rgba(255,190,85,.18); }
+
+      .meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: .92rem; }
+      .kicker { color: var(--accent); font-weight: 700; letter-spacing: .2px; font-size: .88rem; }
+      .actions { margin-top: auto; display: flex; gap: 10px; }
+      .btn {
+        appearance: none; border: none; cursor: pointer; text-decoration: none; text-align: center;
+        padding: 10px 14px; border-radius: 12px; font-weight: 700; font-size: .95rem; line-height: 1; letter-spacing: .2px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0a0b0e;
+        box-shadow: var(--shadow-md);
+      }
+      .btn.secondary { background: transparent; border: 1px solid rgba(255,255,255,.14); color: var(--text); }
+      .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      details.summary-box { border: 1px dashed rgba(255,255,255,.18); background: rgba(255,255,255,.02); border-radius: 14px; padding: 10px 12px; }
+      details.summary-box > summary { cursor: pointer; font-weight: 700; color: var(--muted); }
+      details.summary-box[open] { background: rgba(255,255,255,.04); }
+
+      footer { padding: 28px 24px 48px; color: var(--muted); text-align: center; }
+    </style>
+  </head>
+  <body>
+    <header role="banner">
+      <div class="header-inner container" aria-label="サイトヘッダー">
+        <div class="brand" aria-label="ブランド">
+          <div class="logo" aria-hidden="true"></div>
+          <span>ポートフォリオ（テスト公開）</span>
+        </div>
+        <span class="badge-draft" aria-live="polite" title="Draft: 作成中">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.1L18 21l-6-4-6 4 1.5-7.9L2 9h7z"/></svg>
+          Draft
+        </span>
+      </div>
+    </header>
+
+    <main id="main" class="container" role="main">
+      <h1>🔖 ポートフォリオ初稿（テスト公開版）</h1>
+      <p class="lead">掲載中のプロジェクトは <strong>Draft（作成中）</strong> です。学内外イベントでの未採用案・試行の記録を中心に、今後の発展余地と次の一歩を明示します。</p>
+
+      <section aria-labelledby="projects-title" style="margin-top: 24px;">
+        <h2 id="projects-title" class="visually-hidden" style="position:absolute;left:-9999px;">プロジェクト一覧</h2>
+
+        <div class="grid" id="project-grid">
+          <!-- Project 1 -->
+          <article class="card" data-project="doctoral-loneliness-app">
+            <div class="pill" aria-label="下書き">
+              <span class="dot" aria-hidden="true"></span> Draft / 未採用案
+            </div>
+            <h3>Project 1: 博士課程学生の孤独感を軽減するアプリ</h3>
+            <p class="kicker">1行サマリー</p>
+            <p>博士課程学生の孤独感を、心理学に基づく対話型アプリで前向きなアクションに変換する構想。</p>
+            <p class="kicker">背景</p>
+            <p>博士課程進学者は少数派で孤立しやすい。共感は得られても、実際に頼れる人は限られており、悩みが「燻る」だけになりがち。</p>
+            <p class="kicker">あなたの役割</p>
+            <ul>
+              <li>アイディア創出・問題設定の設計</li>
+            </ul>
+            <p class="kicker">手法（構想段階）</p>
+            <ol>
+              <li>信頼性の高い性格分析（例：Big Five）で悩みと求める回答の関係を特定</li>
+              <li>チャット機能で悩みを細かく収集（困りごと・状況・許容範囲）</li>
+              <li>整理し、次の一歩につながるアクション提案</li>
+            </ol>
+            <p class="kicker">成果</p>
+            <ul>
+              <li>アイディアスケッチとユーザーストーリーの作成（未実装）</li>
+            </ul>
+            <p class="kicker">次の一歩</p>
+            <ul>
+              <li>心理学・キャリア支援の専門家と連携したプロトタイプ開発</li>
+            </ul>
+            <details class="summary-box">
+              <summary>📝 Draft 注記</summary>
+              <p>本アイデアは学内イベントで未採用となったものですが、改良の余地を持つ構想として記録を残しています。</p>
+            </details>
+            <div class="actions">
+              <a class="btn secondary" href="#" aria-disabled="true">資料（準備中）</a>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="card" data-project="music-ai-trials">
+            <div class="pill"><span class="dot"></span> Draft</div>
+            <h3>Project 2: 音楽AI活用の試行</h3>
+            <p class="kicker">1行サマリー</p>
+            <p>AI作曲ツールを活用し、楽曲制作のプロセスを検証した試行記録。</p>
+            <p class="kicker">背景</p>
+            <p>X（旧Twitter）のコミュニティに参加するも既存コミュニティに溶け込めず、独自で試行錯誤を行った。</p>
+            <p class="kicker">あなたの役割</p>
+            <ul>
+              <li>プロンプト作成、試作曲の生成・比較、メモ化</li>
+            </ul>
+            <p class="kicker">手法</p>
+            <ul>
+              <li>AI作曲ツール（例：SUNO AI）を用いた複数パターンの生成</li>
+              <li>プロンプト（歌詞/テーマ）による出力の違いを比較</li>
+            </ul>
+            <p class="kicker">成果</p>
+            <ul>
+              <li>未完成の楽曲サンプル</li>
+              <li>プロンプトと出力の関連メモ</li>
+            </ul>
+            <p class="kicker">次の一歩</p>
+            <ul>
+              <li>制作プロセスを体系化し、公開共有用にまとめる</li>
+            </ul>
+            <details class="summary-box">
+              <summary>📝 Draft 注記</summary>
+              <p>現在は試行段階であり、公開できる楽曲はデモレベルです。</p>
+            </details>
+            <div class="actions">
+              <a class="btn secondary" href="#" aria-disabled="true">デモ（準備中）</a>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="card" data-project="image-gen-thumbnails">
+            <div class="pill"><span class="dot"></span> Draft</div>
+            <h3>Project 3: 画像生成によるサムネイル制作</h3>
+            <p class="kicker">1行サマリー</p>
+            <p>課金なしの環境で、生成AIを活用してブログや記事向けのサムネイル制作を試行。</p>
+            <p class="kicker">背景</p>
+            <p>クリエイティブ制作の第一歩として、低コスト（無課金）環境でどこまで実用的なサムネが作れるかを検証。</p>
+            <p class="kicker">あなたの役割</p>
+            <ul>
+              <li>プロンプト設計、生成結果の選別、実用利用（サムネ設定）</li>
+            </ul>
+            <p class="kicker">手法</p>
+            <ul>
+              <li>無課金AIモデル（例：Hassaku XL、asyncsMIXILLUSTRIOUS）を使用</li>
+              <li>キーワードを調整しながらイメージを近づける</li>
+            </ul>
+            <p class="kicker">成果</p>
+            <ul>
+              <li>複数のサムネイル画像（ブログ用に実際利用）</li>
+            </ul>
+            <p class="kicker">次の一歩</p>
+            <ul>
+              <li>有料モデルや商用利用範囲を試し、制作精度を検証</li>
+            </ul>
+            <details class="summary-box">
+              <summary>📝 Draft 注記</summary>
+              <p>本プロジェクトは試行段階であり、画像はサンプルレベルです。</p>
+            </details>
+            <div class="actions">
+              <a class="btn secondary" href="#" aria-disabled="true">ギャラリー（準備中）</a>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="card" data-project="extracurricular-client-work">
+            <div class="pill"><span class="dot"></span> Draft</div>
+            <h3>Project 4: 課外活動プロジェクト（受注案件の要素を含む）</h3>
+            <p class="kicker">1行サマリー</p>
+            <p>学外で取り組んできた課外活動・受注案件の要素をまとめ、活動の幅を提示。</p>
+            <p class="kicker">背景</p>
+            <p>学校関与がなくなった後も、依頼ベースで小規模な活動を継続。</p>
+            <p class="kicker">あなたの役割</p>
+            <ul>
+              <li>案件ごとの部分的な設計・制作・運用サポート</li>
+            </ul>
+            <p class="kicker">手法</p>
+            <ul>
+              <li>クライアント要件に応じたデザイン・資料作成・テキストサポート</li>
+            </ul>
+            <p class="kicker">成果</p>
+            <ul>
+              <li>公開可能な範囲に限り、断片的なアウトプットを提示</li>
+            </ul>
+            <p class="kicker">次の一歩</p>
+            <ul>
+              <li>掲載許可が下り次第、詳細な成果物を順次追加</li>
+            </ul>
+            <details class="summary-box">
+              <summary>📝 Draft 注記</summary>
+              <p>公開可能な範囲に限って記載しており、今後拡充予定です。</p>
+            </details>
+            <div class="actions">
+              <a class="btn secondary" href="#" aria-disabled="true">ケース（準備中）</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section style="margin-top: 28px;">
+        <h2>トップページ用注釈</h2>
+        <ul class="notice" role="note" aria-label="注釈">
+          <li>🔧 このポートフォリオは現在「テスト公開中」です。</li>
+          <li>📌 掲載中のプロジェクトはすべて「Draft（作成中）」であり、内容は随時更新・差し替え予定です。</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer role="contentinfo">
+      <small>© <span id="year"></span> Nanami Yagishita — Draft Portfolio. All rights reserved.</small>
+    </footer>
+
+    <script>
+      // 年の自動更新
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // アンカーで #project=slug を指定するとそのカードへスクロール（例：?project=music-ai-trials）
+      (function () {
+        const url = new URL(window.location.href);
+        const slug = url.searchParams.get('project');
+        if (!slug) return;
+        const el = document.querySelector(`[data-project="${slug}"]`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.style.outline = '2px solid var(--accent)';
+          el.style.outlineOffset = '4px';
+          setTimeout(() => { el.style.outline = 'none'; }, 2400);
+        }
+      })();
+    </script>
+  </body>
+</html>
