@@ -15,21 +15,6 @@
       掲載中のプロジェクトはすべて <span class="font-semibold">Draft（作成中）</span> です。<br>
       随時更新・差し替え予定です。
     </p>
- 
-<script>
-  const tabs = document.querySelectorAll(".tab-btn");
-  const panels = document.querySelectorAll(".tab-panel");
-
-  tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active", "bg-brown-400", "text-white"));
-      tab.classList.add("active", "bg-brown-400", "text-white");
-
-      panels.forEach(p => p.classList.add("hidden"));
-      panels[i].classList.remove("hidden");
-    });
-  });
-</script>
 
 </section>
 
