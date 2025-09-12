@@ -562,8 +562,13 @@
     };
 
     function scrollToSection(sectionId) {
-      document.getElementById(sectionId).scrollIntoView({ 
-        behavior: 'smooth' 
+      const target = document.getElementById(sectionId);
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const targetPosition = target.offsetTop - navHeight - 20; // 20px extra padding
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       });
     }
 
